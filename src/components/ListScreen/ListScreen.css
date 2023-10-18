@@ -1,0 +1,19 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.list li {
+  width: calc(25% - 10px);
+  list-style: none;
+}
+
+.list img {
+  width: 100%;
+  height: auto;
+}
+
+.list p {
+  margin: 0;
+}
