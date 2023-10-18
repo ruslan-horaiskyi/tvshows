@@ -1,27 +1,30 @@
 import { useState } from "react";
 
 const DetailsScreen = () => {
-  const [show, setShow] = useState(null);
+  const [showData, setShowData] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
+  if (!showData) {
+    return <div>{errorMessage}</div>
+  }
+
+  const { image, name, genres, rating, status, schedule, summary } = showData;
+
   return (
-    <div>
+    <>
       <h1>Show Details</h1>
-      {show ? (
-        <div>
-          <img src={show.image && show.image.medium} alt={show.name} />
-          <p>Name:</p>
-          <p>Genres:</p>
-          <p>Rating:</p>
-          <p>Status:</p>
-          <p>Schedule:</p>
-          <p>Summary:</p>
-          <a href={show.url} target="_blank">Go to the show page</a>
-        </div>
-      ) : (
-        <div>{errorMessage}</div>
-      )}
-    </div>
+
+      <div>
+        <img src={image?.original} alt={name} />
+        {name && <p>Name: {name}</p>}
+        {genres && <p>Genres: {genres.join(', ')}</p>}
+        {rating && <p>Rating: {rating?.average}</p>}
+        {status && <p>Status: {status}</p>}
+        {schedule && <p>Schedule: {schedule.days?.join(', ')} at {schedule.time}</p>}
+        {summary && <p>Summary: {summary}</p>}
+        {url && <a href={url} target="_blank">Go to the show page</a>}
+      </div>
+    </>
   );
 };
 

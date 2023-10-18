@@ -1,17 +1,30 @@
 .list {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 10px;
+
 }
 
 .list li {
-  width: calc(25% - 10px);
+  max-width: 220px;
   list-style: none;
+}
+
+.list li:hover {
+  cursor: pointer;
 }
 
 .list img {
   width: 100%;
   height: auto;
+  transition: ease .4s;
+}
+
+.list img:hover {
+  cursor: pointer;
+  transform: scale(.95);
 }
 
 .list p {

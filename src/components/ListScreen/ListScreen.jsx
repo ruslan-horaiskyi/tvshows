@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from "../../constants";
 
 import './ListScreen.css'
 
@@ -11,11 +12,11 @@ const ListScreen = () => {
     if (query.length >= 2) {
       const fetchShows = async () => {
         try {
-          const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
+          const response = await fetch(`${API_URL}?q=${query}`);
           const data = await response.json();
 
-          if (data && data.length > 0) {
-            setShows(data.map((item) => item.show));
+          if (data?.length > 0) {
+            setShows(data.map(({ show }) => show));
             setErrorMessage('');
           } else {
             setShows([]);
@@ -47,12 +48,12 @@ const ListScreen = () => {
       {errorMessage && <div>{errorMessage}</div>}
 
       <ul className="list">
-        {shows.map((show) => (
-          <li key={show.id}>
-            <img src={show.image && show.image.medium} alt={show.name} />
+        {shows.map(({ id, image, name, rating }) => (
+          <li key={id}>
+            <img src={image?.original} alt={name} />
             <div>
-              <p>Name: {show.name}</p>
-              <p>Rating: {(show.rating && show.rating.average != null) ? show.rating.average : 'none'}</p>
+              <p>Name: {name}</p>
+              <p>Rating: {rating?.average ?? 'none'}</p>
             </div>
           </li>
         ))}
