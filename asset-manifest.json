@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.a0fa8baa.css",
-    "main.js": "/react-gh-pages/static/js/main.efe6266b.js",
-    "index.html": "/react-gh-pages/index.html",
-    "main.a0fa8baa.css.map": "/react-gh-pages/static/css/main.a0fa8baa.css.map",
-    "main.efe6266b.js.map": "/react-gh-pages/static/js/main.efe6266b.js.map"
+    "main.css": "/tvshows/static/css/main.a0fa8baa.css",
+    "main.js": "/tvshows/static/js/main.efe6266b.js",
+    "index.html": "/tvshows/index.html",
+    "main.a0fa8baa.css.map": "/tvshows/static/css/main.a0fa8baa.css.map",
+    "main.efe6266b.js.map": "/tvshows/static/js/main.efe6266b.js.map"
   },
   "entrypoints": [
     "static/css/main.a0fa8baa.css",
