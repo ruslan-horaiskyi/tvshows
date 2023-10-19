@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
-import './ListScreen.css';
+import styles from './ListScreen.module.css';
 import useShowData from './useShowData';
 
 const ListScreen = () => {
@@ -12,22 +12,22 @@ const ListScreen = () => {
   };
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h1>TV Shows Search</h1>
-      <input value={query} onChange={handleInputChange} type="text" placeholder="Type the show's name" />
+      <input value={query} onChange={handleInputChange} type="text" placeholder="Spider ..." />
 
       {query.length < 2 && (
-        <p>Type the show's name</p>
+        <h3>Type the show's name</h3>
       )}
 
       {errorMessage && <div>{errorMessage}</div>}
 
-      <ul className="list">
+      <ul className={styles.list}>
         {showData.map(({ id, image, name, rating }) => (
           <li key={id}>
             <Link to={`/details/${id}`}>
               <img src={image?.original} alt={name} />
-              <div>
+              <div className={styles.showInfo}>
                 <p>Name: {name}</p>
                 <p>Rating: {rating?.average ?? 'none'}</p>
               </div>
