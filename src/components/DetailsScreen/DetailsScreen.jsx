@@ -1,28 +1,9 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
-import { API_URL_DETAILS } from "../../constants";
+import useShowDetails from './useShowDetails';
 
 const DetailsScreen = () => {
-  const [showData, setShowData] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
   const { id } = useParams();
-
-  const fetchShowDataDetails = async () => {
-    try {
-      const response = await fetch(`${API_URL_DETAILS}${id}`);
-      const data = await response.json();
-
-      setShowData(data);
-    } catch (error) {
-      setErrorMessage('Error fetching show details.');
-      console.error('Error fetching show details: ', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchShowDataDetails();
-  }, []);
+  const { showData, errorMessage } = useShowDetails(id);
 
   if (!showData) {
     return <div>{errorMessage}</div>
