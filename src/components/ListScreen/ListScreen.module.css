@@ -11,6 +11,7 @@
 }
 
 .wrapper input {
+  width: 450px;
   color: var(--color-primary);
   background: var(--color-background);
   display: flex;
