@@ -1,37 +1,39 @@
 import { useState, useEffect } from "react";
-import { API_URL } from "../../constants";
+import { Link } from 'react-router-dom';
+
+import { API_URL_SEARCH } from "../../constants";
 
 import './ListScreen.css'
 
 const ListScreen = () => {
   const [query, setQuery] = useState('');
-  const [shows, setShows] = useState([]);
+  const [showData, setShowData] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (query.length >= 2) {
-      const fetchShows = async () => {
+      const fetchShowData = async () => {
         try {
-          const response = await fetch(`${API_URL}?q=${query}`);
+          const response = await fetch(`${API_URL_SEARCH}?q=${query}`);
           const data = await response.json();
 
           if (data?.length > 0) {
-            setShows(data.map(({ show }) => show));
+            setShowData(data.map(({ show }) => show));
             setErrorMessage('');
           } else {
-            setShows([]);
+            setShowData([]);
             setErrorMessage('Sorry, nothing found with this search');
           }
         } catch (error) {
-          setShows([]);
+          setShowData([]);
           setErrorMessage('Error fetching shows');
           console.error('Error fetching shows: ', error);
         }
       };
 
-      fetchShows();
+      fetchShowData();
     } else {
-      setShows([]);
+      setShowData([]);
       setErrorMessage('');
     }
   }, [query]);
@@ -48,18 +50,20 @@ const ListScreen = () => {
       {errorMessage && <div>{errorMessage}</div>}
 
       <ul className="list">
-        {shows.map(({ id, image, name, rating }) => (
+        {showData.map(({ id, image, name, rating }) => (
           <li key={id}>
-            <img src={image?.original} alt={name} />
-            <div>
-              <p>Name: {name}</p>
-              <p>Rating: {rating?.average ?? 'none'}</p>
-            </div>
+            <Link to={`/details/${id}`}>
+              <img src={image?.original} alt={name} />
+              <div>
+                <p>Name: {name}</p>
+                <p>Rating: {rating?.average ?? 'none'}</p>
+              </div>
+            </Link>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
 
 export default ListScreen;
