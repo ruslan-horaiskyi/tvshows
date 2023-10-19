@@ -24,11 +24,11 @@ const DetailsScreen = () => {
     fetchShowDataDetails();
   }, []);
 
+  const { image, name, genres, rating, status, schedule, summary, url } = showData;
+
   if (!showData) {
     return <div>{errorMessage}</div>
   }
-
-  const { image, name, genres, rating, status, schedule, summary, url } = showData;
 
   return (
     <>
